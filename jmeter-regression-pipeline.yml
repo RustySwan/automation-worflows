@@ -8,9 +8,7 @@ pr:
   - main
 name: Jmeter regression pipeline $(date:yyyyMMdd)$(rev:.r)
 
-# Set linux agent in Default pool as in: https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/docker?view=azure-devops#linux
-# pool:
-#   vmImage: 'ubuntu-latest'
+pool: Default
 
 steps:
 - script: |
