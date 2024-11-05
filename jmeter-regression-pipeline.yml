@@ -12,7 +12,7 @@ pool: Default
 
 steps:
 - script: |
-    wget -c https://apache.newfountain.nl//jmeter/binaries/apache-jmeter-5.6.3.tgz
+    wget -c ç
     tar -xf apache-jmeter-5.6.3.tgz
   displayName: 'Install the dependency packages'
   
