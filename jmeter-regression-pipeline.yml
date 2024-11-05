@@ -1,0 +1,28 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+
+pr: 
+  - main
+name: Jmeter regression pipeline $(date:yyyyMMdd)$(rev:.r)
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    wget -c https://apache.newfountain.nl//jmeter/binaries/apache-jmeter-5.6.3.tgz
+    tar -xf apache-jmeter-5.6.3.tgz
+  displayName: 'Install the dependency packages'
+  
+- script: |
+        apache-jmeter-5.6.3/bin/./jmeter -Jjmeter.reportgenerator.overall_granularity=1000 -n -t api/test.jmx -l results/results.jtl -j results/output.log -e -o report
+  displayName: 'Run JMeter'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish JMeter HTML Report'
+  inputs:
+    targetPath: report
+    artifact: jmeter-report
