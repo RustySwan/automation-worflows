@@ -8,6 +8,8 @@ pr:
   - main
 name: Jmeter regression pipeline $(date:yyyyMMdd)$(rev:.r)
 
+pool: Default
+
 steps:
 - script: |
     wget -c https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.6.3.tgz
